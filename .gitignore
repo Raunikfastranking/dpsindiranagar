@@ -1,0 +1,12 @@
+# Secrets / environment-specific config
+proxy/config.php
+
+# Cache
+includes/cache/
+
+# OS / editor cruft
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.bak
+*.log
