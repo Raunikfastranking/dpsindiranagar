@@ -50,31 +50,13 @@ require_once "layouts/layout-function.php";
 $pageSlug = $_GET['page'] ?? 'home';
 $pageSlug = preg_replace('/\.php$/i', '', $pageSlug);
 $pageSlug = trim($pageSlug, '/');
-$pageApiUrl = "https://dps.allenhouseschools.com/api/pages/$pageSlug";
 
-// Fetch page data
+// Fetch page data (cached, same SWR behaviour as the shared bundle)
 require_once __DIR__ . '/proxy/config.php';
 
-$pageCh = curl_init($pageApiUrl);
-curl_setopt_array($pageCh, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT        => 15,
-    CURLOPT_CONNECTTIMEOUT => 5,
-    CURLOPT_SSL_VERIFYPEER => false,
-    CURLOPT_HTTPHEADER     => api_auth_headers(),
-]);
-$pageResponse = curl_exec($pageCh);
-$pageHttpCode = curl_getinfo($pageCh, CURLINFO_HTTP_CODE);
-curl_close($pageCh);
+$pageData2 = dps_api_page_get(DPS_API_BASE_URL, $pageSlug);
 
-if ($pageResponse === false || empty($pageResponse) || $pageHttpCode !== 200) {
-    header("HTTP/1.0 404 Not Found");
-    include "404.php";
-    exit;
-}
-
-$pageData2 = json_decode($pageResponse, true);
-if (!isset($pageData2['data']) || empty($pageData2['data'])) {
+if (!is_array($pageData2) || !isset($pageData2['data']) || empty($pageData2['data'])) {
     header("HTTP/1.0 404 Not Found");
     include "404.php";
     exit;

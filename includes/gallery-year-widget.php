@@ -1,8 +1,5 @@
 <?php
-/**
- * Compatibility shim for Unnao-style gallery-year-widget.php includes.
- * Indiranagar branch 6 + JWT proxy.
- */
+
 
 if (!function_exists('dps_gallery_year_toolbar_grid_markup')) {
     function dps_gallery_year_toolbar_grid_markup(

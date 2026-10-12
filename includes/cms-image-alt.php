@@ -3,8 +3,8 @@ if (!function_exists('cms_image_alt')) {
     /**
      * Alt text from CMS (same keys site-wide): media_alt_text → image_alt → image_alt_text, then fallback.
      *
-     * @param array|null $row API row (section column, media item, blog row, etc.)
-     * @param string $fallback When all CMS alt fields are empty
+     * @param array|null 
+     * @param string 
      */
     function cms_image_alt($row, $fallback = 'Image')
     {
