@@ -2,7 +2,8 @@
 proxy/config.php
 
 # Cache
-includes/cache/
+includes/cache/*
+!includes/cache/.htaccess
 
 # OS / editor cruft
 Thumbs.db
