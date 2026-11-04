@@ -1,47 +1,132 @@
 <?php
-$api_url = "https://allenhouse-dps.fastranking.cloud";
-function fetchMultipleApiData($endpoints)
-{
-    $baseUrl = "https://allenhouse-dps.fastranking.cloud/api";
-    $mh = curl_multi_init();
-    $curlHandles = [];
-    $responses = [];
-    // Create all curl handles
-    foreach ($endpoints as $key => $endpoint) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $baseUrl . $endpoint);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // disable SSL check if needed
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_multi_add_handle($mh, $ch);
-        $curlHandles[$key] = $ch;
-    }
-    $running = null;
-    do {
-        $status = curl_multi_exec($mh, $running);
+require_once dirname(__DIR__) . '/proxy/config.php';
+require_once __DIR__ . '/cms-image-alt.php';
+require_once __DIR__ . '/layout-parts-resolve.php';
+require_once __DIR__ . '/api-cache.php';
+$api_url = "https://dps.allenhouseschools.com";
 
-        if ($status > CURLM_OK) {
-             break;
-        }
-        curl_multi_select($mh);
-        usleep(10000);
-    } while ($running > 0);
-
-    // Collect responses
-    foreach ($curlHandles as $key => $ch) {
-        $content = curl_multi_getcontent($ch);
-        $responses[$key] = json_decode($content, true);
-        curl_multi_remove_handle($mh, $ch);
-        curl_close($ch);
-    }
-    curl_multi_close($mh);
-    return $responses;
+/** Branch id for gallery year API (photo_gallery_data / achievement_data use branch/6). */
+if (!defined('DPS_INDIRANAGAR_GALLERY_BRANCH_ID')) {
+    define('DPS_INDIRANAGAR_GALLERY_BRANCH_ID', DPS_INDIRANAGAR_BRANCH_ID);
 }
-$endpoints = [
-    'home_data'   => '/pages/home-page-indiranagar',
- ];
 
-$data = fetchMultipleApiData($endpoints);
+$endpoints = include __DIR__ . '/api-endpoints.php';
+
+// Cached bundle: fresh for DPS_API_CACHE_TTL seconds; stale data is served
+// instantly while a background refresh updates it, so pages never wait on
+// the CMS API. See includes/api-cache.php.
+$data = dps_api_get_bundle(DPS_API_BASE_URL, $endpoints);
+$dps_api_bundle = $data;
 $home_data   = $data['home_data'];
- 
-?>
+$contact_data = $data['contact_data'];
+$menu_data = $data['menu_data'];
+$flyer_data = $data['flyer_data'];
+$header_footer_data = $data['header_footer_data'];
+$footer_layout_meta = dps_resolve_footer_layout_meta($header_footer_data);
+$scroll_text_data = $data['scroll_text_data'];
+$excellence_data   = $data['excellence_data'];
+$celebrating_data   = $data['celebrating_data'];
+$spotlight_data   = $data['spotlight_data'];
+$embark_data   = $data['embark_data'];
+$statistic_data = $data['statistic_data'];
+$mv_data   = $data['mv_data'];
+$ourmotto_data   = $data['ourmotto_data'];
+$indiranagarhistory_data   = $data['indiranagarhistory_data'];
+$society_data   = $data['society_data'];
+$chairmans_data   = $data['chairmans_data'];
+$principals_data   = $data['principals_data'];
+$managementcommittee_data   = $data['managementcommittee_data'];
+$protection_data   = $data['protection_data'];
+$parentteachers_data   = $data['parentteachers_data'];
+$foodhygiene_data   = $data['foodhygiene_data'];
+$disastermanagement_data   = $data['disastermanagement_data'];
+$grievance_data   = $data['grievance_data'];
+$facultylist_data   = $data['facultylist_data'];
+$schoolguidelines_data   = $data['schoolguidelines_data'];
+$ourcurriculum_data   = $data['ourcurriculum_data'];
+$foundationalstage_data   = $data['foundationalstage_data'];
+$foundationalstage_data   = $data['foundationalstage_data'];
+$preparatorystage_data   = $data['preparatorystage_data'];
+$middlestage_data   = $data['middlestage_data'];
+$secondarystage_data   = $data['secondarystage_data'];
+$funland_data   = $data['funland_data'];
+$smartclassrooms_data   = $data['smartclassrooms_data'];
+$library_data   = $data['library_data'];
+$physics_data   = $data['physics_data'];
+$physics_data   = $data['physics_data'];
+$chemistry_data   = $data['chemistry_data'];
+$biology_data   = $data['biology_data'];
+$composite_data   = $data['composite_data'];
+$codings_data   = $data['codings_data'];
+$computer_data   = $data['computer_data'];
+$animation_data   = $data['animation_data'];
+$sportsroom_data   = $data['sportsroom_data'];
+$playground_data   = $data['playground_data'];
+$dances_data   = $data['dances_data'];
+$art_data   = $data['art_data'];
+$counsellingcell_data   = $data['counsellingcell_data'];
+$infirmarys_data   = $data['infirmarys_data'];
+$cafeteria_data   = $data['cafeteria_data'];
+$subjects_data   = $data['subjects_data'];
+$assessmentsystem_data   = $data['assessmentsystem_data'];
+$academiccalendars_data   = $data['academiccalendars_data'];
+$cocurricular_data   = $data['cocurricular_data'];
+$outbounds_data   = $data['outbounds_data'];
+$animations_data   = $data['animations_data'];
+$coding_data   = $data['coding_data'];
+$oluxismart_data   = $data['oluxismart_data'];
+$financialliteracy_data   = $data['financialliteracy_data'];
+$housesystem_data   = $data['housesystem_data'];
+$studentcouncil_data   = $data['studentcouncil_data'];
+$peereducation_data   = $data['peereducation_data'];
+$music_data   = $data['music_data'];
+// today works
+$muskuratechehre_data   = $data['muskuratechehre_data'];
+$convergence_data   = $data['convergence_data'];
+$careerguidance_data   = $data['careerguidance_data'];
+$seniorwing_data   = $data['seniorwing_data'];
+$middlewing_data   = $data['middlewing_data'];
+$primarywing_data   = $data['primarywing_data'];
+$rhapsody_data   = $data['rhapsody_data'];
+$annualsports_data   = $data['annualsports_data'];
+$innovision_data   = $data['innovision_data'];
+$winter_data   = $data['winter_data'];
+$investitureceremony_data   = $data['investitureceremony_data'];
+$citation_data   = $data['citation_data'];
+$summercamp_data   = $data['summercamp_data'];
+$interschool_data   = $data['interschool_data'];
+$admissioncriteria_data   = $data['admissioncriteria_data'];
+$withdrawalpolicy_data   = $data['withdrawalpolicy_data'];
+$grouptransfer_data   = $data['grouptransfer_data'];
+$busroutes_data   = $data['busroutes_data'];
+$academicachievements_data   = $data['academicachievements_data'];
+$extracurricular_data   = $data['extracurricular_data'];
+$awardaccolades_data   = $data['awardaccolades_data'];
+$photogallery_data   = $data['photogallery_data'];
+$videogallery_data   = $data['videogallery_data'];
+$mediagallery_data   = $data['mediagallery_data'];
+$ourstory_data   = $data['ourstory_data'];
+$facilities_data   = $data['facilities_data'];
+$cbsemandatory_data   = $data['cbsemandatory_data'];
+$documents_data   = $data['documents_data'];
+$results_data   = $data['results_data'];
+$staffteaching_data   = $data['staffteaching_data'];
+$schoolinfrastructure_data   = $data['schoolinfrastructure_data'];
+$dpsshuman_data   = $data['dpsshuman_data'];
+$cbseinformation_data   = $data['cbseinformation_data'];
+$superhouseeducation_data   = $data['superhouseeducation_data'];
+$faqs_data   = $data['faqs_data'];
+$process_____data = $data['process_____data'];
+$photo_gallery_data = $data['photo_gallery_data'];
+$achievement_data = $data['achievement_data'];
+$fee_____data = $data['fee_____data'];
+$footer_link_data = $data['footer_link_data'];
+$jobs_data = $data['jobs_data'];
+$process_data = $data['process_data'];
+$fee_data = $data['fee_data'];
+$bus_routes_data = $data['bus_routes_data'];
+$route_data = $data['route_data'];
+$blogData = $data['blogData'];
+$testimonial_data = $data['testimonial_data'];
+$terms_and_conditions = $data['terms_and_conditions'];
+$robotics_data   = $data['robotics_data'];
