@@ -155,14 +155,14 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
 
 /* Enquiry popup — same compact popup size as before */
 #popupForm .dps-enquiry-modal {
-    width: min(400px, calc(100vw - 24px));
-    max-height: 78vh;
+    width: min(480px, calc(100vw - 24px));
+    max-height: 96vh;
     overflow-x: hidden;
     overflow-y: auto;
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-    padding: 14px 18px 12px;
+    padding: 20px 24px 16px;
     position: relative;
     scrollbar-width: thin;
 }
@@ -209,20 +209,20 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
 #popupForm #ee-form-16 .modal-header .ee-form-heading,
 #popupForm #ee-form-16 .ee-form-heading {
     text-align: left !important;
-    font-size: 18px !important;
+    font-size: 20px !important;
     font-weight: 700 !important;
     color: #111 !important;
     margin: 0 28px 8px 0 !important;
     padding: 0 !important;
 }
 #popupForm #ee-form-16 .ee-form-body > .ee-row {
-    margin: 0 0 7px 0 !important;
+    margin: 0 0 8px 0 !important;
     width: 100% !important;
 }
 #popupForm #ee-form-16 .ee-form-body.TWO_COLUMNS {
     display: flex;
     flex-wrap: wrap;
-    gap: 7px;
+    gap: 8px;
 }
 #popupForm #ee-form-16 .ee-form-body.TWO_COLUMNS > .ee-row:not(.full-width) {
     width: calc(50% - 4px) !important;
@@ -230,18 +230,18 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
 }
 #popupForm #ee-form-16 .ee-form-body.TWO_COLUMNS > .ee-row.full-width {
     width: 100% !important;
-    margin: 0 0 7px 0 !important;
+    margin: 0 0 8px 0 !important;
 }
 #popupForm #ee-form-16 input:not([type="checkbox"]):not([type="radio"]):not([type="search"]):not([type="tel"]),
 #popupForm #ee-form-16 select,
 #popupForm #ee-form-16 textarea,
 #popupForm #ee-form-16 .select2-container--default .select2-selection--single {
-    min-height: 34px !important;
-    height: 34px !important;
+    min-height: 40px !important;
+    height: 40px !important;
     border: 1px solid #d1d5db !important;
     border-radius: 6px !important;
-    padding: 6px 10px !important;
-    font-size: 13px !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
     background: #fff !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -250,12 +250,12 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
     width: 100% !important;
 }
 #popupForm #ee-form-16 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: 20px !important;
+    line-height: 38px !important;
     padding-left: 0 !important;
     color: #6b7280 !important;
 }
 #popupForm #ee-form-16 .select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 32px !important;
+    height: 38px !important;
 }
 #popupForm #ee-form-16 .inline-inputs {
     display: flex !important;
@@ -277,15 +277,15 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
 #popupForm #ee-form-16 .iti--separate-dial-code input,
 #popupForm #ee-form-16 .iti--allow-dropdown input {
     width: 100% !important;
-    min-height: 34px !important;
-    height: 34px !important;
+    min-height: 40px !important;
+    height: 40px !important;
     border: 1px solid #d1d5db !important;
     border-radius: 6px !important;
-    font-size: 13px !important;
+    font-size: 14px !important;
     background: #fff !important;
     box-sizing: border-box !important;
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
     padding-right: 10px !important;
     padding-left: 96px !important;
     margin: 0 !important;
@@ -318,10 +318,10 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
     border: 1px solid #003618 !important;
     color: #fff !important;
     border-radius: 9999px !important;
-    padding: 9px 16px !important;
-    font-size: 14px !important;
+    padding: 10px 16px !important;
+    font-size: 15px !important;
     font-weight: 600 !important;
-    min-height: 38px;
+    min-height: 44px;
 }
 #popupForm #ee-form-16 .btn.btn-submit:hover {
     background: #005224 !important;
