@@ -1,9 +1,8 @@
 <?php
 // Central config for API base URL, branch ID, and JWT auth
-// Copy this file to proxy/config.php and fill in real values (config.php is gitignored).
-define('API_BASE_URL', 'https://example.com');
-define('DPS_INDIRANAGAR_BRANCH_ID', 0);
-define('API_JWT_TOKEN', 'YOUR_JWT_TOKEN_HERE');
+define('API_BASE_URL', 'https://allenp.superhouseerp.com');
+define('DPS_INDIRANAGAR_BRANCH_ID', 6);
+define('API_JWT_TOKEN', 'hgutuyg758374tg5f3738y87gusdfjhgjh$@.hgjgjhikj');
 
 if (!function_exists('api_auth_headers')) {
     /**
