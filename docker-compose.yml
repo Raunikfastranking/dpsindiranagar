@@ -3,4 +3,6 @@ services:
     build: .
     ports:
       - "9007:80"
+    volumes:
+      - .:/var/www/html
     restart: unless-stopped
