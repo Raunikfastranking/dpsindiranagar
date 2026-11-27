@@ -2,7 +2,13 @@
 require_once dirname(__DIR__) . '/proxy/config.php';
 require_once __DIR__ . '/cms-image-alt.php';
 require_once __DIR__ . '/layout-parts-resolve.php';
+require_once __DIR__ . '/api-cache.php';
 $api_url = "https://dps.allenhouseschools.com";
+
+// Browser cache header: max 60 seconds (ensures browser does not hold stale HTML longer than 1 minute)
+if (!headers_sent()) {
+    header('Cache-Control: public, max-age=60, must-revalidate');
+}
 
 // CMS content embeds media as relative /upload/... paths — rewrite to absolute CMS host
 // so images/files resolve on any frontend domain (local dev, production, etc.).
@@ -172,7 +178,8 @@ $endpoints = [
     'cities_list'   => '/cities/6'
 ];
 
-$data = fetchMultipleApiData($endpoints);
+// Cached bundle: TTL 60 seconds (auto-refreshes within 1-2 minutes of any CMS update)
+$data = dps_api_get_bundle(DPS_API_BASE_URL, $endpoints);
 $dps_api_bundle = $data;
 $home_data   = $data['home_data'];
 $contact_data = $data['contact_data'];

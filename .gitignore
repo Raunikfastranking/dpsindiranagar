@@ -1,0 +1,5 @@
+includes/cache/*.json
+!includes/cache/grades_cache.json
+includes/cache/*.lock
+includes/cache/*.flag
+includes/cache/*.tmp*
