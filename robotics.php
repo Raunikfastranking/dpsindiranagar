@@ -68,13 +68,42 @@ include "includes/apis.php";
             </ol>
         </div>
 
+        <?php
+        $section0 = $robotics_data['data']['sections'][0] ?? [];
+        $columns = $section0['columns'] ?? [];
+        $imageUrl = '';
+        $imageCol = [];
+        $textContent = '';
+
+        if (!empty($columns)) {
+            foreach ($columns as $col) {
+                if (($col['content_type'] ?? '') === 'image' || !empty($col['image_url']) || !empty($col['image_path'])) {
+                    $imageUrl = !empty($col['image_url']) ? $col['image_url'] : ($col['image_path'] ?? '');
+                    $imageCol = $col;
+                } elseif (($col['content_type'] ?? '') === 'text' || !empty($col['content'])) {
+                    $textContent = $col['content'] ?? '';
+                }
+            }
+        }
+        if (empty($textContent) && !empty($section0['content'])) {
+            $textContent = $section0['content'];
+        }
+        ?>
+
         <div class="2xl:w-[1280px] lg:w-[1024px] md:w-[767px] sm:w-[640px] sm:mx-auto sm:px-5 mx-3 sm:py-10 py-0 sm:p-20 p-0">
-            <div class="md:flex gap-9 mt-6 mb-10">
-                <!-- <div class="md:w-[40%]">
-                    <img src="https://dummyimage.com/550x397/e6e6ed/000000&text=Not+Provided" alt="Robotics Education" class="w-[100%]">
-                </div> -->
-                <div class="md:w-[60%]">
-                    <?= $robotics_data['data']['sections'][0]['content'] ?? "" ?>
+            <div class="md:flex gap-9 mt-6 mb-10 items-start">
+                <?php if (!empty($imageUrl)): ?>
+                    <div class="md:w-[45%] w-full flex-shrink-0 mb-6 md:mb-0">
+                        <img src="<?= htmlspecialchars($imageUrl) ?>"
+                            alt="<?= cms_image_alt($imageCol, $section0['title'] ?? 'Robotics Education'); ?>"
+                            class="w-full rounded-md shadow">
+                    </div>
+                <?php endif; ?>
+                <div class="<?= !empty($imageUrl) ? 'md:w-[55%] w-full' : 'w-full' ?>">
+                    <?php if (!empty($section0['content_heading'])): ?>
+                        <h2 class="text-2xl font-bold text-blue-main mb-4"><?= $section0['content_heading'] ?></h2>
+                    <?php endif; ?>
+                    <?= $textContent ?>
                 </div>
             </div>
         </div>
